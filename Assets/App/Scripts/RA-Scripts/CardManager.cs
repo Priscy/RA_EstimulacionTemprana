@@ -8,6 +8,7 @@ public class CardManager : MonoBehaviour {
 	public GameObject card;
 	private MarkerTracker markerTracker;
 	private List<Card> cards;
+	public List<GameObject> models = new List<GameObject> ();
 		// Use this for initialization
 	void Start () {
 		generateCards ();
@@ -47,12 +48,12 @@ public class CardManager : MonoBehaviour {
 			//
 		int count = 0;
 		foreach(Card card in cards){
-			generateCard(card,count);
+			generateCard(card,count,models[count]);
 			count++;
 		}
 	}
 
-	public void generateCard(Card c,int id){
+	public void generateCard(Card c,int id,GameObject model){
 		//if(Constantes.isDebugging)Debug.Log("generateCard: "+c);
 		if(markerTracker==null){
 			markerTracker = TrackerManager.Instance.GetTracker<MarkerTracker> ();
@@ -67,14 +68,15 @@ public class CardManager : MonoBehaviour {
 		mab.gameObject.transform.parent=gameObject.transform;
 
 
-			//add prefab like a child to Marker
-		//card.gameObject.transform.localScale += new Vector3(0.1F,0.1F,0.1F);
-		GameObject instance=NGUITools.AddChild(mab.gameObject,card);
-		instance.name="Card-"+id;
-			//set values from the card
-		//CardControllerv2 cc=instance.GetComponent<CardControllerv2>();
-		//cc.generateCard (c);
-			//calculate guiStatus
+			//add card as a prefab
+		GameObject tarjeta=NGUITools.AddChild(mab.gameObject,card);
+		tarjeta.name="Card-"+id;
+		tarjeta.gameObject.transform.localScale = new Vector3 (0.1F,0.1F,0.1F);
+
+		GameObject modelo = NGUITools.AddChild (tarjeta, model);
+		modelo.name = "Modelo";
+
+
 
 
 		
