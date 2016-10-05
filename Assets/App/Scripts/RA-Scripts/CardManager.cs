@@ -9,6 +9,7 @@ public class CardManager : MonoBehaviour {
 	private MarkerTracker markerTracker;
 	private List<Card> cards;
 	public List<GameObject> models = new List<GameObject> ();
+	public List<AudioClip> audios = new List<AudioClip>();
 		// Use this for initialization
 	void Start () {
 		generateCards ();
@@ -48,12 +49,13 @@ public class CardManager : MonoBehaviour {
 			//
 		int count = 0;
 		foreach(Card card in cards){
-			generateCard(card,count,models[count]);
+			generateCard(card,count,models[count],audios[count]);
 			count++;
 		}
 	}
 
-	public void generateCard(Card c,int id,GameObject model){
+	public void generateCard(Card c,int id,GameObject model, AudioClip audio){
+		Debug.Log ("------"+audio.name);
 		//if(Constantes.isDebugging)Debug.Log("generateCard: "+c);
 		if(markerTracker==null){
 			markerTracker = TrackerManager.Instance.GetTracker<MarkerTracker> ();
@@ -75,6 +77,11 @@ public class CardManager : MonoBehaviour {
 
 		GameObject modelo = NGUITools.AddChild (tarjeta, model);
 		modelo.name = "Modelo";
+		modelo.gameObject.transform.localPosition = new Vector3 (0F,1.5F,0F);
+
+		AudioSource sonido = tarjeta.AddComponent<AudioSource> ();
+		sonido.clip = Resources.Load(audio.name) as AudioClip;
+
 
 
 

@@ -8,7 +8,7 @@ public class Card: MonoBehaviour{
 	
 	// Use this for initialization
 	void Start () {
-	
+		this.transform.FindChild ("Modelo").gameObject.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -29,5 +29,6 @@ public class Card: MonoBehaviour{
 	private void tappedHandler(object sender, EventArgs e){
 		Debug.Log ("Car has been tapped");
 		this.transform.FindChild ("Modelo").gameObject.SetActive (true);
+		this.GetComponent<AudioSource> ().Play ();
 	}
 }
