@@ -30,7 +30,6 @@ public class UI_contoller : MonoBehaviour {
 	void crearClicked () {
 		inicio.SetActive (false);
 		crearUsuario.SetActive (true);
-		Debug.Log ("pantalla crear usuario activa");
-		
+		Debug.Log ("pantalla crear usuario activa");		
 	}
 }
