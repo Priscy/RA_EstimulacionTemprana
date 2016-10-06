@@ -12,6 +12,7 @@ public class CardManager : MonoBehaviour {
 	public List<AudioClip> audios = new List<AudioClip>();
 		// Use this for initialization
 	void Start () {
+		markerTracker = TrackerManager.Instance.GetTracker<MarkerTracker> ();
 		generateCards ();
 	}
 
@@ -57,8 +58,9 @@ public class CardManager : MonoBehaviour {
 	public void generateCard(Card c,int id,GameObject model, AudioClip audio){
 		Debug.Log ("------"+audio.name);
 		//if(Constantes.isDebugging)Debug.Log("generateCard: "+c);
-		if(markerTracker==null){
+		if(markerTracker==null){			
 			markerTracker = TrackerManager.Instance.GetTracker<MarkerTracker> ();
+			Debug.Log (markerTracker);
 		}
 		//create marker 
 		MarkerAbstractBehaviour mab = markerTracker.CreateMarker (id,"Frame_"+id,1);
